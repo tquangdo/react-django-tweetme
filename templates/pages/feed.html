@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+this is amazing!!!!
+{% endblock head_title%}
+
+
+{% block content %}
+<div id='tweets'>
+    Replace me
+</div>
+<script>
+    const tweetsElem = document.getElementById('tweets')
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = '/tweets'
+    const resType = 'json'
+    xhr.responseType = resType
+    xhr.open(method, url)
+    xhr.onload = function () {
+        const serverRes = xhr.response
+        const listItem = serverRes.responseFromTListView
+        let finalTweetsStr = ''
+        for (let index = 0; index < listItem.length; index++) {
+            let curItem = "<div class='mb-4'>" + listItem[index].id + "<p>" + listItem[index].content + "</p></div>"
+            finalTweetsStr += curItem
+        }
+        tweetsElem.innerHTML = finalTweetsStr
+    }
+    xhr.send()
+</script>
+{% endblock content %}
