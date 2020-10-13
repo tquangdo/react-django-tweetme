@@ -14,11 +14,13 @@ from tweets.views import (
     home_view,
     tweets_list_view,
     tweets_detail_view,
+    tweet_create_view,
 )
 
 urlpatterns = [
     path('', home_view),
     path('admin/', admin.site.urls),
+    path('create-tweet/', tweet_create_view),
     path('tweets/', tweets_list_view),
     # path('global/', tweets_list_view),
     path('<int:tweet_id>', tweets_detail_view),

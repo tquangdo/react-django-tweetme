@@ -4,10 +4,14 @@
 this is amazing!!!!
 {% endblock head_title%}
 
-
 {% block content %}
-<div id='tweets'>
-    Replace me
+<div class='row text-center'>
+    <div class='col'>
+        <h1>Welcome to Tweetme</h1>
+    </div>
+</div>
+<div class='row' id='tweets'>
+    Loading...
 </div>
 <script>
     const tweetsElem = document.getElementById('tweets')
@@ -15,14 +19,28 @@ this is amazing!!!!
     const method = 'GET'
     const url = '/tweets'
     const resType = 'json'
+    function handleDidLike(tweet_id, like_count) {
+        console.log(tweet_id, like_count)
+        return
+    }
+
+    function onLikeBtn(arg_tweet) {
+        return "<button class='btn btn-primary btn-sm' onclick=handleDidLike(" +
+            arg_tweet.id + "," + arg_tweet.likes + ")>" + arg_tweet.likes + " Likes</button>"
+    }
+    function formatTweetElement(tweet_item) {
+        const formattedTweet = "<div class='col-12 col-md-10 mx-auto border rounded py-3 mb-4 tweet' id='tweet-" + tweet_item.id + "'><p>" + tweet_item.content + "</p><div class='btn-group'>" + onLikeBtn(tweet_item) +
+            "</div></div>"
+        return formattedTweet
+    }
     xhr.responseType = resType
     xhr.open(method, url)
     xhr.onload = function () {
         const serverRes = xhr.response
-        const listItem = serverRes.responseFromTListView
+        const listItems = serverRes.responseFromTListView
         let finalTweetsStr = ''
-        for (let index = 0; index < listItem.length; index++) {
-            let curItem = "<div class='mb-4'>" + listItem[index].id + "<p>" + listItem[index].content + "</p></div>"
+        for (let index = 0; index < listItems.length; index++) {
+            const curItem = formatTweetElement(listItems[index])
             finalTweetsStr += curItem
         }
         tweetsElem.innerHTML = finalTweetsStr
