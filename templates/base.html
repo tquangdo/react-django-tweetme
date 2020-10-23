@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    {% comment %} {% include 'react/css.html' %} {% endcomment %}
+    {% include 'react/css.html' %}
     <style>
       .bg-tweetme {
           background-color: #8e1f1f!important;
@@ -22,7 +22,7 @@
       {% block content %}
       {% endblock content %}
     </div>
-    {% comment %} {% include 'react/base_embed.html' %}
-    {% include 'react/js.html' %} {% endcomment %}
+    {% include 'react/base_embed.html' %}
+    {% include 'react/js.html' %}
   </body>
 </html>

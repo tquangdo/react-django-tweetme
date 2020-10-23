@@ -5,12 +5,17 @@ this is amazing!!!!
 {% endblock head_title%}
 
 {% block content %}
-<div class='row text-center'>
+
+{% comment %} cho dù xóa file "react_via_dj.html" & "react.html" thì vẫn chạy OK vì đã có
+static\js\main.a4bcf737.chunk.js.map: document.getElementById('root')... {% endcomment %}
+<div id='root'></div>
+
+<div class='row text-center d-none'>
     <div class='col'>
         <h1>Welcome to Tweetme</h1>
     </div>
 </div>
-<div class='row mb-3'>
+<div class='row mb-3 d-none'>
     <div class='col-md-4 mx-auto col-10'>
         <form class='form' id='tweet-create-form' method='POST' action='/create-tweet'>
             {% csrf_token %}
@@ -21,7 +26,7 @@ this is amazing!!!!
         </form>
     </div>
 </div>
-<div class='row' id='tweets'>
+<div class='row d-none' id='tweets'>
     Loading...
 </div>
 <script>
@@ -64,7 +69,7 @@ this is amazing!!!!
         xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
         xhr.onload = function() {
-            //console.log(xhr.status, xhr.response) //redirect to value='/' của <form id='tweet-create-form'>
+            //console.log(xhr.status, xhr.response) //redirect to <input value='/' /> của <form id='tweet-create-form'>
             if (xhr.status === 201) {
                 onTweetFormError("", false)
                 const newTweetJson = xhr.response

@@ -14,18 +14,16 @@ from tweets.views import (
     home_view,
     tweets_list_view,
     tweet_detail_view,
-    tweet_create_view,
-    tweet_delete_view,
-    tweet_action_view,
 )
 
 urlpatterns = [
     path('', home_view),
     path('admin/', admin.site.urls),
-    path('create-tweet', tweet_create_view),
     path('tweets', tweets_list_view),
     path('tweets/<int:tweet_id>', tweet_detail_view),
     path('api/tweets/', include('tweets.urls')),
+    path('react', TemplateView.as_view(template_name='react.html')),
+    # path('react', TemplateView.as_view(template_name='react_via_dj.html')),
     # path('login/', login_view),
     # path('logout/', logout_view),
     # path('register/', register_view),
@@ -33,6 +31,6 @@ urlpatterns = [
     # re_path(r'api/profiles?/', include('profiles.api.urls')),
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.STATIC_URL,
-#                           document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
