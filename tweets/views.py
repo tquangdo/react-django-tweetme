@@ -30,7 +30,7 @@ def home_view(request, *args, **kwargs):
 # dòng code trên thay cho đống code của pure_django: if not userVar.is_authenticated
 def tweet_create_view(request, *args, **kwargs):
     # vì thao tác create mới nên arg phải truyền (data=request.POST)
-    serializer = TweetCreateSerializer(data=request.POST)
+    serializer = TweetCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)

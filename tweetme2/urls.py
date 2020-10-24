@@ -22,8 +22,8 @@ urlpatterns = [
     path('tweets', tweets_list_view),
     path('tweets/<int:tweet_id>', tweet_detail_view),
     path('api/tweets/', include('tweets.urls')),
-    path('react', TemplateView.as_view(template_name='react.html')),
-    # path('react', TemplateView.as_view(template_name='react_via_dj.html')),
+    path('react', TemplateView.as_view(
+        template_name='react.html')),  # react_via_dj.html
     # path('login/', login_view),
     # path('logout/', logout_view),
     # path('register/', register_view),

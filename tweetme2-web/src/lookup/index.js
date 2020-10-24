@@ -1,9 +1,7 @@
 import {
-    createTweet,
-    loadTweets
+    backendLookup
 } from './components'
 
 export {
-    createTweet,
-    loadTweets
+    backendLookup
 }
