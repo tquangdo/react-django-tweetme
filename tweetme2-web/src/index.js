@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { TweetsComponent } from './tweets'
+import { TweetsComponent, TweetDetailComponent } from './tweets'
 // import App from './App'
 
 // ReactDOM.render(
@@ -13,3 +13,9 @@ if (tweetsEl) {
   ReactDOM.render(
     e(TweetsComponent, tweetsEl.dataset), tweetsEl)
 }
+const tweetDetailElements = document.querySelectorAll(".tweetme2-detail")
+tweetDetailElements.forEach(container => {
+  ReactDOM.render(
+    e(TweetDetailComponent, container.dataset),
+    container)
+})

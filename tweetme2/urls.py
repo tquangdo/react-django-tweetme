@@ -11,16 +11,18 @@ from django.views.generic import TemplateView
 # )
 
 from tweets.views import (
-    home_view,
-    tweets_list_view,
-    tweet_detail_view,
+    # home_view,
+    local_tweets_list_view,
+    local_tweets_detail_view,
+    local_tweets_profile_view,
 )
 
 urlpatterns = [
-    path('', home_view),
     path('admin/', admin.site.urls),
-    path('tweets', tweets_list_view),
-    path('tweets/<int:tweet_id>', tweet_detail_view),
+    # path('', home_view),
+    path('', local_tweets_list_view),
+    path('<int:tweet_id>', local_tweets_detail_view),
+    path('profile/<str:username>', local_tweets_profile_view),
     path('api/tweets/', include('tweets.urls')),
     path('react', TemplateView.as_view(
         template_name='react.html')),  # react_via_dj.html
