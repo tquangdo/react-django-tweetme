@@ -41,9 +41,9 @@ class Tweet(models.Model):
     # many users can many tweets
     # KO có dk null=True nên khi tạo tweet bằng JS (file "feed.html") sẽ hiện ERR: "There was a server error, please try again."
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="tweets")
+        User, on_delete=models.CASCADE, related_name="rname_tweets")
     likes = models.ManyToManyField(
-        User, related_name='tweet_user', blank=True, through=TweetLike)
+        User, related_name='rname_tweet_user', blank=True, through=TweetLike)
     content = models.TextField(blank=True, null=True)
     image = models.FileField(upload_to='images/', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)

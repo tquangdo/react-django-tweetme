@@ -26,7 +26,6 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 @permission_classes([IsAuthenticated])
 # dòng code trên thay cho đống code của pure_django: if not userVar.is_authenticated
 def tweet_create_view(request, *args, **kwargs):
-    # vì thao tác create mới nên arg phải truyền (data=request.POST)
     serializer = TweetCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
@@ -66,7 +65,6 @@ def tweet_action_view(request, *args, **kwargs):
     2/id is required.
     3/action options are: like, unlike, retweet
     '''
-    # vì thao tác action nên arg phải truyền (data=request.data)
     serializer = TweetActionSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         data = serializer.validated_data
