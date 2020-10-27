@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class='col-10 col-md-4 mx-auto'>
+    <h1>{{ title_from_viewspy }}</h1>
+    {% if description_from_viewspy %}
+    <p>{{ description_from_viewspy }} </p>
+    {% endif %}
+    {% include "components/form.html" with formTweetCreateView=form_from_viewspy btn_label_from_viewspy=btn_label_from_viewspy %}
+</div>
+
+{% endblock content %}

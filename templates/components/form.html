@@ -7,5 +7,6 @@
 {% endif %}
 <form method='POST'> {% csrf_token %}
     {{ formTweetCreateView.as_p }}
-    <button type='submit' class='btn btn-secondary'>Lưu</button>
+    <button type='submit' class='btn btn-secondary'>{% if btn_label_from_viewspy %}
+        {{btn_label_from_viewspy}} {% else %}Save{% endif %}</button>
 </form>
