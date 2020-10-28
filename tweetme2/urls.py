@@ -19,6 +19,11 @@ from tweets.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', home_view),
+    # đang chạy với build static of tweetme2-web(public>index.html) có data-username="trangia61"
+    # login với acc="dotq" rồi access "localhost:8000" thì dù "dotq" có tweets nhưng UI KO hiện!!!
+    # lí do: vẫn đang chạy với build static of tweetme2-web có data-username="trangia61":
+    # tweets_list_view > list.html > base.html > {% include 'react/js.html' %}
+    # => muốn phản ánh thì phải sửa bên tweetme2-web: npm run build rồi copy paste qua!
     path('', tweets_list_view),
     path('<int:tweet_id>', tweets_detail_view),
     path('api/tweets/', include('tweets.api.urls')),

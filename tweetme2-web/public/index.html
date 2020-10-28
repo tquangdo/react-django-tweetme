@@ -11,11 +11,12 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <!-- <div class='d-none' id='root'></div>-->
-  <div id='tweet-container'></div>
-  <div id="tweetme2" data-username="trangia61" data-can-tweet="true"></div>
+  <div class='d-none' id="tweetme2-feed" ></div>
+  <div class='d-none' id='tweet-container'></div>
+  <div id="tweetme2" data-username="dotq" data-can-tweet="true"></div>
   <script>
       var path = window.location.pathname
-      var idRegex = /(?<tweetid>\d+)/
+      var idRegex = /tweets\/(?<tweetid>\d+)/
       var match = path.match(idRegex)
       if (match) {
         var tweetId = match.groups.tweetid

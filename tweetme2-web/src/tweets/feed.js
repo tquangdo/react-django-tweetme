@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { apiTweetList } from './lookup'
+
+import { apiTweetFeed } from './lookup'
+
 import { Tweet } from './detail'
 
-export function TweetsList(props) {
-    //~~~~~~ STATE
-    const [tweetsInit, setTweetsInit] = useState([]) //init tweet
+export function FeedList(props) {
+    const [tweetsInit, setTweetsInit] = useState([])
     const [tweets, setTweets] = useState([])
     const [nextUrl, setNextUrl] = useState(null)
     const [isTweetsDidSet, setTweetsDidSet] = useState(false)
     useEffect(() => {
         const final = [...props.newTweets].concat(tweetsInit)
         if (final.length !== tweets.length) {
-            setTweets(final) //final tweet
+            setTweets(final)
         }
     }, [props.newTweets, tweets, tweetsInit])
 
@@ -20,16 +21,15 @@ export function TweetsList(props) {
             const handleTweetListLookup = (response, status) => {
                 if (status === 200) {
                     setNextUrl(response.next)
-                    setTweetsInit(response.results) //init tweet
+                    setTweetsInit(response.results)
                     setTweetsDidSet(true)
-                } else {
-                    alert("There was an error")
                 }
             }
-            //nếu ko có "isTweetsDidSet" thì sẽ là vòng lặp vô hạn apiTweetList(handleTweetListLookup) dẫn đến gọi API từ Django vô hạn > console python nhảy liên tục!!!
-            apiTweetList(props.username, handleTweetListLookup) //call API giống Axios: "http://localhost:8000/api/tweets/"
+            apiTweetFeed(handleTweetListLookup)
         }
     }, [tweetsInit, isTweetsDidSet, setTweetsDidSet, props.username])
+
+
     const handleDidRetweet = (newTweet) => {
         const updateTweetsInit = [...tweetsInit]
         updateTweetsInit.unshift(newTweet)
@@ -47,24 +47,19 @@ export function TweetsList(props) {
                     const newTweets = [...tweets].concat(response.results)
                     setTweetsInit(newTweets)
                     setTweets(newTweets)
-                } else {
-                    alert("There was an error")
                 }
             }
-            apiTweetList(props.username, handleLoadNextResponse, nextUrl)
+            apiTweetFeed(handleLoadNextResponse, nextUrl)
         }
     }
 
-    return <React.Fragment>
-        {
-            tweets.map((item, index) => {
-                return <Tweet
-                    tweet={item}
-                    didRetweet={handleDidRetweet}
-                    className='my-5 py-5 border bg-white text-dark'
-                    key={`${index}-{item.id}`} />
-            })
-        }
+    return <React.Fragment>{tweets.map((item, index) => {
+        return <Tweet
+            tweet={item}
+            didRetweet={handleDidRetweet}
+            className='my-5 py-5 border bg-white text-dark'
+            key={`${index}-{item.id}`} />
+    })}
         {nextUrl !== null && <button onClick={handleLoadNext} className='btn btn-outline-primary'>Load next</button>}
     </React.Fragment>
 }
