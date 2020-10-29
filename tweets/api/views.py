@@ -109,7 +109,6 @@ def get_paginated_queryset_response(qs, request):
 def tweet_feed_view(request, *args, **kwargs):
     user = request.user
     # Tweet.objects.feed() > TweetManager.feed() > get_queryset().feed() > TweetQuerySet.feed()
-    # 1/ login bằng acc "dotq": "http://localhost:8000/api/tweets/feed" chỉ hiện tweets of "dotq" (l/q follow "dotq")
     qs = Tweet.objects.feed(user)
     return get_paginated_queryset_response(qs, request)
 
@@ -117,10 +116,9 @@ def tweet_feed_view(request, *args, **kwargs):
 @api_view(['GET'])
 def tweet_list_view(request, *args, **kwargs):
     qs = Tweet.objects.all()
-    # username lấy từ acc đang login trong localhost:8000/admin ?!?
+    # username lấy từ lookup.js > endpoint = `/tweets/?username=${username}`
     username = request.GET.get('username')
     if username != None:
-        # 2/ login bằng acc "dotq": "http://localhost:8000/api/tweets" hiện tweets of all accs (KO l/q "username = request.GET.get('username')")
         qs = qs.by_username(username)
     return get_paginated_queryset_response(qs, request)
 

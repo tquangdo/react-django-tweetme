@@ -12,7 +12,7 @@ export function apiTweetDetail(tweetId, callback) {
 }
 export function apiTweetFeed(callback, nextUrl) {
     let endpoint = "/tweets/feed"
-    if (nextUrl !== null && nextUrl !== undefined) {
+    if (nextUrl !== null && nextUrl !== undefined) { // dùng cho pagination
         endpoint = nextUrl.replace("http://localhost:8000/api", "")
     }
     backendLookup("GET", endpoint, callback)

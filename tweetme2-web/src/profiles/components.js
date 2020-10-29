@@ -25,6 +25,7 @@ export function UserDisplay(props) {
 export function UserPicture(props) {
     const { userOUserPicture } = props
     return <UserLink usernameOUserLink={userOUserPicture.username}><span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
-        {userOUserPicture.username[0]}
+        {/* {userOUserPicture.username[0]} */}
+        {userOUserPicture.username.substring(0, 4)}
     </span></UserLink>
 }

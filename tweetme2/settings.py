@@ -144,10 +144,10 @@ if DEBUG:
         'rest_framework.renderers.BrowsableAPIRenderer',
     ]
     # có dòng này thì KO cần login vẫn có thể thao tác Like/Unlike/Create tweet
-    # vì dev.py > qs = User.objects.filter(id=2): id=2 là "trangia61"
-    DEFAULT_AUTHENTICATION_CLASSES += [
-        'tweetme2.rest_api.dev.DevAuthentication'
-    ]
+    # vì dev.py > qs = User.objects.filter(id=2)
+    # DEFAULT_AUTHENTICATION_CLASSES += [
+    #     'tweetme2.rest_api.dev.DevAuthentication'
+    # ]
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
