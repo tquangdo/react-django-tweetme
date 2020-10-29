@@ -41,8 +41,13 @@ def profile_detail_view(request, username, *args, **kwargs):
         # access "profile/username" sẽ hiện 404 nếu profiles>models.py KO có Profile.objects.get_or_create()
         raise Http404
     profile_obj = qs.first()
+    is_following = False
+    if request.user.is_authenticated:
+        user = request.user
+        is_following = user in profile_obj.followers.all()
     context = {
         "profile_un_from_viewspy": username,
-        "profile_from_viewspy": profile_obj
+        "profile_from_viewspy": profile_obj,
+        "is_following_from_viewspy": is_following
     }
     return render(request, "profiles/detail.html", context)

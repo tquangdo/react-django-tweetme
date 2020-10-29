@@ -14,18 +14,20 @@ export function UserLink(props) {
 }
 
 export function UserDisplay(props) {
-    const { userOUserDisplay, isFullName } = props
+    const { userOUserDisplay, isFullName, hideLink } = props
     const nameDisplay = (isFullName) ? `${userOUserDisplay.first_name} ${userOUserDisplay.last_name} ` : null
     return <React.Fragment>
         {nameDisplay}
-        <UserLink usernameOUserLink={userOUserDisplay.username}>@{userOUserDisplay.username}</UserLink>
+        {
+            (hideLink) ? `@${userOUserDisplay.username}` : <UserLink usernameOUserLink={userOUserDisplay.username}>@{userOUserDisplay.username}</UserLink>
+        }
     </React.Fragment>
 }
 
 export function UserPicture(props) {
-    const { userOUserPicture } = props
-    return <UserLink usernameOUserLink={userOUserPicture.username}><span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
-        {/* {userOUserPicture.username[0]} */}
+    const { userOUserPicture, hideLink } = props
+    const userIdSpan = <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
         {userOUserPicture.username.substring(0, 4)}
-    </span></UserLink>
+    </span>
+    return (hideLink) ? userIdSpan : <UserLink username={userOUserPicture.username}>{userIdSpan}</UserLink>
 }
