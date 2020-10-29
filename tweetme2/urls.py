@@ -24,7 +24,7 @@ urlpatterns = [
     # lí do: tweets_list_view > list.html > base.html > {% include 'react/js.html' %}
     # => muốn phản ánh thì phải sửa bên tweetme2-web: npm run build rồi copy paste qua!
     path('global', tweets_list_view),
-    path('<int:tweet_id>', tweets_detail_view),
+    path('tweets/<int:tweet_id>', tweets_detail_view),
     path('api/tweets/', include('tweets.api.urls')),
     path('react', TemplateView.as_view(
         template_name='react.html')),  # react_via_dj.html

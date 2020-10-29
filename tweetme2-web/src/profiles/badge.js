@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UserDisplay, UserPicture } from './components'
 import { apiProfileDetail, apiProfileFollowToggle } from './lookup'
+import { DisplayCount } from './utils'
 
 function ProfileBadge(props) {
     const { user, didFollowToggle, isProfileLoading } = props
@@ -16,6 +17,18 @@ function ProfileBadge(props) {
     return user ? <div>
         <UserPicture userOUserPicture={user} hideLink />
         <p><UserDisplay userOUserDisplay={user} isFullName hideLink /></p>
+        <p>
+            <DisplayCount>
+                {user.follower_count}
+            </DisplayCount> {(user.follower_count === 1 || user.follower_count === 0) ? "follower" : "followers"}
+        </p>
+        <p>
+            <DisplayCount>
+                {user.following_count}
+            </DisplayCount> following
+        </p>
+        <p>Location: {user.location}</p>
+        <p>Bio: {user.bio}</p>
         <button className='btn btn-primary' onClick={handleFollowToggle}>{currentVerb}</button>
     </div> : null
 }

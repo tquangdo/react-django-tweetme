@@ -101,7 +101,7 @@ def get_paginated_queryset_response(qs, request):
     paginator.page_size = 20
     paginated_qs = paginator.paginate_queryset(qs, request)
     serializer = TweetSerializer(
-        paginated_qs, many=True, context={"requestFGPQResponse": request})
+        paginated_qs, many=True)
     return paginator.get_paginated_response(serializer.data)
 
 
@@ -137,7 +137,6 @@ def tweet_create_view_pure_django(request, *args, **kwargs):
     next_url = request.POST.get("next-from-feed-html") or None
     if form.is_valid():
         obj = form.save(commit=False)
-        # do other form related logic
         obj.user = userVar
         obj.save()
         # C1
@@ -165,7 +164,6 @@ def tweets_list_view_pure_django(request, *args, **kwargs):
         'responseFromTListView': tweets_list
     }
     return JsonResponse(data)
-    # return render(request, "tweets/list.html")
 
 
 def tweet_detail_view_pure_django(request, tweet_id, *args, **kwargs):

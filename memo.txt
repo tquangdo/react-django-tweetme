@@ -1,0 +1,14 @@
+Cần fix:
+
+1/ khi chưa login thì:
+* profiles/username > click "Follow/Unfollow" > redirect to /login
+(now: lỗi "500 (Internal Server Error)")
+
+2/ (login)
+* click like tweet latest = 1 > create tweet mới > auto like = 1(NG) > F5 > like return = 0 (OK)
+-> sửa lại auto like = 0
+
+3/ (login)
+* create tweet mới > retweet > nội dung tweet = null và phải F5 mới update
+
+4/ hiện trên header "Welcome login username"

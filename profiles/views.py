@@ -47,7 +47,5 @@ def profile_detail_view(request, username, *args, **kwargs):
         is_following = user in profile_obj.followers.all()
     context = {
         "profile_un_from_viewspy": username,
-        "profile_from_viewspy": profile_obj,
-        "is_following_from_viewspy": is_following
     }
     return render(request, "profiles/detail.html", context)
