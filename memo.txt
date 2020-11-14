@@ -1,5 +1,8 @@
 Cần fix:
 
+0/ register > ngay sau khi login xong > redirect sang home thì lập tức lại sang login!!!
+lỗi "Forbidden: /api/tweets/feed"
+
 1/ khi chưa login thì:
 * profiles/username > click "Follow/Unfollow" > redirect to /login
 (now: lỗi "500 (Internal Server Error)")
